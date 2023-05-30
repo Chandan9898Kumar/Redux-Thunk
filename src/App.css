@@ -93,3 +93,32 @@ img {
   font-weight: bolder;
   color: darkorange;
 }
+.Buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttonAdd,
+.buttonRemove {
+  width: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 1px solid green;
+  height: 40px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  transition: all 2s;
+  border-radius: 10px;
+}
+.buttonAdd:hover {
+  background-color: green;
+  color: aliceblue;
+}
+
+.buttonRemove:hover {
+  border: 1px solid rgb(174, 97, 80);
+  background-color: rgb(174, 97, 80);
+  color: aliceblue;
+}

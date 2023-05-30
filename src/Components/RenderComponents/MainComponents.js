@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../Services/Actions/Action";
 import RenderItems from "./RenderItems";
@@ -10,16 +11,21 @@ const MainComponent = (props) => {
   } = props;
 
   useEffect(() => {
-    getApiData(fetchProducts());
+    getApiData();
   }, []);
-
   return (
     <>
       <div className="headerStatus">
         <div style={{ width: "50%" }}>Cart Items</div>
         <div style={{ width: "50%" }}>
           Total Items :{"  "}
-          {apiData && apiData.length}
+          {apiData && apiData.length > 0 ? (
+            apiData.length
+          ) : (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          )}
         </div>
       </div>
       <div className="itemContainer">

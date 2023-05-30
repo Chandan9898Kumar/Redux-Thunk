@@ -2,9 +2,9 @@ import { SET_Products, Add_To_Cart, Remove_From_Cart } from "../Constants";
 
 //  Here we are applying Thunk
 // fetchProducts() is the "thunk action creator"
-export const fetchProducts = () => {
+export const fetchProducts = (props) => {
   //  thunk send dispatch method as a parameter.\
-    // fetchDataByThunk is the "thunk function"
+  // fetchDataByThunk is the "thunk function"
   return async function fetchDataByThunk(dispatch) {
     const result = await fetch(
       "https://asos2.p.rapidapi.com/products/v2/list?country=US&currency=USD&sort=freshness&lang=en-US&sizeSchema=US&offset=0&categoryId=4209&limit=48&store=US",
@@ -33,5 +33,12 @@ export const sendProducts = (data = []) => {
   return {
     type: SET_Products,
     payload: [],
+  };
+};
+
+export const addItemsToCart = (data = []) => {
+  return {
+    type: Add_To_Cart,
+    payload: data,
   };
 };
