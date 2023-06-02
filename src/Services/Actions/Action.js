@@ -42,3 +42,16 @@ export const addItemsToCart = (data = []) => {
     payload: data,
   };
 };
+
+export const removeItemsFromCart = (data = []) => {
+  if (data && data.length > 0) {
+    return {
+      type: Remove_From_Cart,
+      payload: data,
+    };
+  }
+  return {
+    type: Remove_From_Cart,
+    payload: data || [],
+  };
+};

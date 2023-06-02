@@ -1,11 +1,15 @@
 import React, { memo } from "react";
 import "../../App.css";
-import { addItemsToCart } from "../../Services/Actions/Action";
+import {
+  addItemsToCart,
+  removeItemsFromCart,
+} from "../../Services/Actions/Action";
 import { connect } from "react-redux";
 const RenderItems = ({ items, ...props }) => {
   const {
     addItemToCart,
-    data: { addedItems, apiData },
+    removeDataFromCart,
+    data
   } = props;
 
   return (
@@ -19,12 +23,22 @@ const RenderItems = ({ items, ...props }) => {
         <div className="Buttons">
           <button
             disabled={items.disabled}
-            className="buttonAdd"
+            className={
+              items && items.disabled ? "buttonAddDisabled" : "buttonAdd"
+            }
             onClick={() => addItemToCart({ ...items, disabled: true })}
           >
             Add
           </button>
-          <button className="buttonRemove">Remove</button>
+          <button
+            disabled={!items.disabled}
+            className={
+              items && !items.disabled ? "buttonRemoveDisabled" : "buttonRemove"
+            }
+            onClick={() => removeDataFromCart({ ...items, disabled: false })}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </>
@@ -36,6 +50,7 @@ const mapStateToProps = (state) => ({
   data: state.Products,
 });
 const mapDispatchToProps = (dispatch) => ({
-  addItemToCart: (data) => dispatch(addItemsToCart(data)),
+  addItemToCart: (addedData) => dispatch(addItemsToCart(addedData)),
+  removeDataFromCart: (removeData) => dispatch(removeItemsFromCart(removeData)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(memo(RenderItems));

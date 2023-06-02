@@ -32,6 +32,23 @@ const productReducer = (state = initialState, action) => {
         }),
       };
 
+    case Remove_From_Cart:
+      return {
+        ...state,
+        addedItems: state.addedItems.filter((items) => {
+          return items.id !== action.payload.id;
+        }),
+        apiData: state.apiData.map((item) => {
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              disabled: false,
+            };
+          }
+          return item;
+        }),
+      };
+
     default:
       return state;
   }
